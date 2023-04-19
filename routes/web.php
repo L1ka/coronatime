@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\LogoutController;
 
 
 /*
@@ -23,5 +24,10 @@ Route::view('/verify/email', 'email-sent-message')->name('email-sent');
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'signIn'])->name('login.sign-in');
+
+Route::post('/logout/user', [LogoutController::class, 'perform'])->name('logout.perform');
+
+
+
 
 
