@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Contracts\Auth\CanResetPassword;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
 {
@@ -37,7 +38,7 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
 
 
 
-    public function verifyUser()
+    public function verifyUser(): HasOne
     {
         return $this->hasOne(VerifyUser::class);
     }
