@@ -9,6 +9,10 @@ use App\Models\User;
 use App\Models\VerifyUser;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
+use App\Http\Requests\LoginRequest;
+
 
 
 
@@ -53,6 +57,34 @@ class AuthController extends Controller
 
         return redirect()->route('login')->with('error', 'Something went wrong!!');
 
+    }
+
+    public function signIn( LoginRequest $request): RedirectResponse
+    {
+       $fieldType = filter_var($request->name, FILTER_VALIDATE_EMAIL) ? 'email' : 'name';
+
+
+       if(!auth()->attempt([$fieldType => $request->name, 'password' => $request->password]))
+       {
+            throw ValidationException::withMessages([
+                'name' => 'Your provided credentials could not be verified.'
+            ]);
+       }
+
+        if (Auth::user()->email_verified_at === null) {
+            throw ValidationException::withMessages([
+                'name' => 'Please verify your email to continue'
+            ]);
+        }
+
+        session()->regenerate();
+
+      return redirect()->route('home');
+    }
+
+    public function login(): View
+    {
+        return view('login');
     }
 
 
