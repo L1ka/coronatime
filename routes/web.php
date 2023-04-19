@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,5 +21,7 @@ Route::get('/user/{token}', [AuthController::class, 'verifyEmail'])->name('user.
 
 Route::view('/verify/email', 'email-sent-message')->name('email-sent');
 
+Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/login', [AuthController::class, 'signIn'])->name('login.sign-in');
 
 
