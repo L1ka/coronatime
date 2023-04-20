@@ -3,7 +3,14 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LogoutController;
-
+use App\Http\Controllers\StatController;
+use App\Models\User;
+use App\Models\VerifyUser;
+use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Str;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +34,7 @@ Route::post('/login', [AuthController::class, 'signIn'])->name('login.sign-in');
 
 Route::post('/logout/user', [LogoutController::class, 'perform'])->name('logout.perform');
 
+Route::get('set-locale/{locale}', [LocaleController::class, 'setLocale'])->name('set-locale');
 
 
 
