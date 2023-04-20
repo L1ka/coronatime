@@ -6,6 +6,7 @@
         @vite('resources/css/app.css')
         <title>Coronatime</title>
 
+
     <body class="h-screen w-screen">
         {{ $slot }}
     </body>
