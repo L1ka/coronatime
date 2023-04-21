@@ -9,7 +9,7 @@ use Illuminate\Contracts\View\View;
 class StatController extends Controller
 {
 
-    public function getCountry(): View
+    public function countries(): View
     {
         if (request('search')) {
             $data = Stat::where('name', 'like', '%' . ucfirst(request('search')) . '%')->get();
