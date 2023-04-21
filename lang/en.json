@@ -41,5 +41,8 @@
     "enter_new_password": "Enter new password",
     "save_changes": "SAVE CHANGES",
     "success_password": "Your password has been updeted successfully",
-    "success_email": "Your account is confirmed, you can sign in"
+    "success_email": "Your account is confirmed, you can sign in",
+    "confirmation_password": "Recover password",
+    "verify_password_btn": "click this button to recover a password",
+    "verify_password": "RECOVER PASSWORD"
 }

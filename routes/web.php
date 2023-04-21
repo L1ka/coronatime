@@ -4,13 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\StatController;
-use App\Models\User;
-use App\Models\VerifyUser;
-use Illuminate\Auth\Events\PasswordReset;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Password;
-use Illuminate\Support\Str;
+use App\Http\Controllers\LocaleController;
+use App\Http\Controllers\ResetPasswordController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +23,7 @@ Route::get('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/register', [AuthController::class, 'signUp'])->name('register.sign-up');
 Route::get('/user/{token}', [AuthController::class, 'verifyEmail'])->name('user.verify-email');
 
-Route::view('/verify/email', 'email-sent-message')->name('email-sent');
+Route::view('/verify/email', 'email-sent-message')->name('email-sent');/////
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'signIn'])->name('login.sign-in');
@@ -35,6 +31,28 @@ Route::post('/login', [AuthController::class, 'signIn'])->name('login.sign-in');
 Route::post('/logout/user', [LogoutController::class, 'perform'])->name('logout.perform');
 
 Route::get('set-locale/{locale}', [LocaleController::class, 'setLocale'])->name('set-locale');
+
+
+
+Route::view('/forgot-password', 'reset-password-email')->middleware('guest')->name('password.request');
+
+Route::post('/forgot-password', [ResetPasswordController::class, 'email'])->middleware('guest')->name('password.email');
+
+Route::get('/reset-password/{token}', [ResetPasswordController::class, 'reset'])->middleware('guest')->name('password.reset');
+
+Route::post('/reset-password', [ResetPasswordController::class, 'update'])->middleware('guest')->name('password.update');
+
+Route::view('/password-success', 'success-password')->name('password-success');
+
+
+
+
+
+
+
+
+
+
 
 
 

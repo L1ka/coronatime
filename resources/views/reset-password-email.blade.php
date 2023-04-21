@@ -15,7 +15,7 @@
             </div>
             <button type="submit" class="btn-primary mb-[40px] lg:mb-0 self-center lg:text-sm-2 font-black">{{ Str::upper(__('reset_password')) }}</button>
 
-            </form>
+        </form>
         </div>
     </div>
 </x-layout>
