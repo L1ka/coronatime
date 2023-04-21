@@ -15,6 +15,7 @@ module.exports = {
             yellow: "#EAD621",
             gray: "#E6E6E7",
             red: "#CC1E1E",
+            white: "#ffffff",
         },
         fontFamily: {
             inter: "Inter, sans-serif",
@@ -40,5 +41,5 @@ module.exports = {
             },
         },
     },
-    plugins: [],
+    plugins: [require("tailwind-scrollbar")],
 };
