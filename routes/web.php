@@ -45,6 +45,9 @@ Route::post('/reset-password', [ResetPasswordController::class, 'update'])->midd
 Route::view('/password-success', 'success-password')->name('password-success');
 
 
+Route::get('/dashboard-country', [StatController::class, 'countries'])->name('dashboard-country.countries');
+
+Route::post('/dashboard-country', [StatController::class, 'sort'])->name('dashboard-country.sort');
 
 
 
