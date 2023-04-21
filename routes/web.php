@@ -42,7 +42,7 @@ Route::get('/reset-password/{token}', [ResetPasswordController::class, 'reset'])
 
 Route::post('/reset-password', [ResetPasswordController::class, 'update'])->middleware('guest')->name('password.update');
 
-Route::view('/success/password', 'success-password')->name('password-success');
+Route::view('/password-success', 'success-password')->name('password-success');
 
 
 
