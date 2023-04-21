@@ -2,7 +2,7 @@
 <x-layout>
     <div class="flex justify-center lg:block">
         <div class=" pt-4 lg:pt-10 px-4 lg:pl-28 min-h-full">
-            <div class="flex justify-between items-center">
+            <div class="flex justify-between w-full lg:w-[50%]">
                 <img src="{{ asset('images/logo.svg') }}" alt="logo" class="w-32 lg:w-44 h-8 lg:h-11">
                 <x-dropdown></x-dropdown>
             </div>
@@ -21,7 +21,7 @@
 
                 <button type="submit" class="btn-primary">{{ __('sign_up') }}</button>
 
-                <p class="text-light-dark text-xs-1 text-center w-[100%] mt-[24px]">{{ __('have_account') }}  <a href="#" class="text-dark text-xs-3">{{ __("login") }}</a></p>
+                <p class="text-light-dark text-xs-1 text-center w-[100%] mt-[24px]">{{ __('have_account') }}  <a href="{{ route('login') }}" class="text-dark text-xs-3">{{ __("login") }}</a></p>
             </form>
         </div>
 
