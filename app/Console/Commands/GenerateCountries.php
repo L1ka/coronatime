@@ -27,6 +27,7 @@ class GenerateCountries extends Command
      */
     public function handle()
     {
+        Stat::truncate();
         $data =collect(json_decode(Http::get('https://devtest.ge/countries'))) ;
 
         $data->map(function($country){
