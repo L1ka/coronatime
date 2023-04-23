@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\Register\RegisterRequest;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use App\Mail\VerifyEmail;
@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
-use App\Http\Requests\LoginRequest;
+use App\Http\Requests\Login\LoginRequest;
 
 
 
@@ -34,9 +34,6 @@ class AuthController extends Controller
 
 
         Mail::to($user->email)->send(new VerifyEmail($user));
-
-
-        auth()->login($user);
 
         return redirect()->route('email-sent', ['user' => $user]);
     }
@@ -67,7 +64,7 @@ class AuthController extends Controller
        if(!auth()->attempt([$fieldType => $request->name, 'password' => $request->password]))
        {
             throw ValidationException::withMessages([
-                'name' => 'Your provided credentials could not be verified.'
+                'name' => __("wrong_credentials")
             ]);
        }
 
@@ -76,6 +73,9 @@ class AuthController extends Controller
                 'name' => 'Please verify your email to continue'
             ]);
         }
+
+        Auth::login(Auth::user(),  $request->has('remember'));
+
 
         session()->regenerate();
 
