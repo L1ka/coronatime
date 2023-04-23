@@ -44,5 +44,7 @@
     "success_email": "Your account is confirmed, you can sign in",
     "confirmation_password": "Recover password",
     "verify_password_btn": "click this button to recover a password",
-    "verify_password": "RECOVER PASSWORD"
+    "verify_password": "RECOVER PASSWORD",
+    "confirm_email": "Confirmation email",
+    "wrong_credentials": "Your provided credentials could not be verified."
 }
