@@ -38,9 +38,9 @@ class ResetPasswordController extends Controller
     public function update(Request $request): RedirectResponse
     {
         $request->validate([
-            'token' => 'required|min:3',
-            'email' => 'required|email',
-            'password' => 'required|confirmed',
+            'token' => ['required' ],
+            'email' => ['required', 'email'],
+            'password' => ['required', 'confirmed','min:3'],
         ]);
 
         $status = Password::reset(
@@ -57,7 +57,7 @@ class ResetPasswordController extends Controller
         );
 
         return $status === Password::PASSWORD_RESET
-                    ? redirect()->route('password.success')->with('status', __($status))
+                    ? redirect()->route('password-success')->with('status', __($status))
                     : back()->withErrors(['email' => [__($status)]]);
     }
 }
