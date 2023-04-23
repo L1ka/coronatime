@@ -40,7 +40,15 @@ class StatController extends Controller
         return view('dashboard-country', ['data' => $data,  'recover' => $recoverSum, 'death' => $deathSum, 'new_case' => $confirmedSum]);
     }
 
+    public function worldwide(): View
+    {
 
+        $recoverSum = Stat::all()->pluck('recover')->sum();
+        $deathSum = Stat::all()->pluck('death')->sum();
+        $confirmedSum = Stat::all()->pluck('new_case')->sum();
+
+        return view('dashboard-worldwide', [ 'recover' => $recoverSum, 'death' => $deathSum, 'new_case' => $confirmedSum]);
+    }
 
 
 }

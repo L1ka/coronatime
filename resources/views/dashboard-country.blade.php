@@ -12,7 +12,7 @@
 
         <div class="pt-4 md:pt-10 ">
             <table class="text-left max-w-[300px] md:min-w-full bg-white border border-solid border-dark-4">
-                <thead  class="bg-dark-4 flex text-white w-full h-[56px]">
+                <thead  class="bg-dark-4 flex text-dark w-full h-[56px]">
                     <tr class="flex w-full mb-4">
                         <th class="pt-2 md:p-4 w-1/4" >
                             <div class="flex items-center">

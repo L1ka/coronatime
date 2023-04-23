@@ -19,44 +19,51 @@ use App\Http\Controllers\ResetPasswordController;
 |
 */
 
-Route::get('/register', [AuthController::class, 'register'])->name('register');
-Route::post('/register', [AuthController::class, 'signUp'])->name('register.sign-up');
-Route::get('/user/{token}', [AuthController::class, 'verifyEmail'])->name('user.verify-email');
 
-Route::view('/verify/email', 'email-sent-message')->name('email-sent');/////
-
-Route::get('/login', [AuthController::class, 'login'])->name('login');
-Route::post('/login', [AuthController::class, 'signIn'])->name('login.sign-in');
-
-Route::post('/logout/user', [LogoutController::class, 'perform'])->name('logout.perform');
+Route::group(['controller' => AuthController::class], function () {
+    Route::get('/register', 'register')->name('register');
+    Route::post('/register',  'signUp')->name('register.sign-up');
+    Route::get('/user/{token}',  'verifyEmail')->name('user.verify-email');
+    Route::get('/login',  'login')->name('login');
+    Route::post('/login',  'signIn')->name('login.sign-in');
+});
 
 Route::get('set-locale/{locale}', [LocaleController::class, 'setLocale'])->name('set-locale');
 
 
+Route::middleware([ 'auth', 'verified'])->group(function() {
 
-Route::view('/forgot-password', 'reset-password-email')->middleware('guest')->name('password.request');
+    Route::post('/logout/user', [LogoutController::class, 'perform'])->name('logout.perform');
 
-Route::post('/forgot-password', [ResetPasswordController::class, 'email'])->middleware('guest')->name('password.email');
+    Route::group(['controller' => StatController::class], function () {
 
-Route::get('/reset-password/{token}', [ResetPasswordController::class, 'reset'])->middleware('guest')->name('password.reset');
+        Route::get('/dashboard-country', 'countries')->name('dashboard-country.countries');
 
-Route::post('/reset-password', [ResetPasswordController::class, 'update'])->middleware('guest')->name('password.update');
+        Route::post('/dashboard-country', 'sort')->name('dashboard-country.sort');
 
-Route::view('/password-success', 'success-password')->name('password-success');
+        Route::get('/dashboard/worldwide', 'worldwide')->name('home');
+    });
 
+});
 
-Route::get('/dashboard-country', [StatController::class, 'countries'])->name('dashboard-country.countries');
+Route::middleware([ 'guest'])->group(function() {
 
-Route::post('/dashboard-country', [StatController::class, 'sort'])->name('dashboard-country.sort');
+    Route::view('/forgot-password', 'reset-password-email')->name('password.request');
 
+    Route::group(['controller' => ResetPasswordController::class], function () {
 
+        Route::post('/forgot-password',  'email')->name('password.email');
 
+        Route::get('/reset-password/{token}',  'reset')->name('password.reset');
 
+        Route::post('/reset-password',  'update')->name('password.update');
 
+    });
 
-
-
-
+    Route::view('/password-success', 'success-password')->name('password-success');
+    Route::view('/success/email', 'success-verify-email')->name('success');
+    Route::view('/verify/email', 'email-sent-message')->name('email-sent');
+});
 
 
 
