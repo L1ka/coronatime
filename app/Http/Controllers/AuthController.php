@@ -35,7 +35,7 @@ class AuthController extends Controller
 
         Mail::to($user->email)->send(new VerifyEmail($user));
 
-        return redirect()->route('email-sent', ['user' => $user]);
+        return redirect()->route('email-sent');
     }
 
 
