@@ -27,16 +27,17 @@ class GenerateCountries extends Command
      */
     public function handle()
     {
-        Stat::truncate();
         $data =collect(json_decode(Http::get('https://devtest.ge/countries'))) ;
 
-        $data->map(function($country){
+        $data->map(function($country, $id){
             $byCountry = json_decode(Http::post('https://devtest.ge/get-country-statistics', [
                 "code" => $country->code,
             ]));
 
-            return Stat::create([
-                'name' => $country->name,
+            return Stat::updateOrCreate(
+            ['id' => $id + 1 ],
+            [
+                'name' => ['en' => $country->name->en, 'ka' => $country->name->ka],
                 'new_case' =>  $byCountry->confirmed,
                 'recover' =>  $byCountry->recovered,
                 'death' =>  $byCountry->deaths]);
