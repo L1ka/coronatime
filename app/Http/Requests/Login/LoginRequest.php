@@ -16,10 +16,8 @@ class LoginRequest extends FormRequest
      */
     public function rules(): array
     {
-        $column = filter_var($this->request->all()['name'], FILTER_VALIDATE_EMAIL) ? 'exists:users,email' : 'exists:users,name';
-
         return [
-            'name' => ['required', $column],
+            'name' => ['required'],
             'password' => ['required'],
         ];
     }
