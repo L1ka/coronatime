@@ -11,7 +11,7 @@ class RegisterTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_register_page_is_accessible()
+    public function test_register_page_is_accessible(): void
     {
         $response = $this->get( route('register'));
 
@@ -19,7 +19,7 @@ class RegisterTest extends TestCase
         $response->assertViewIs('register');
     }
 
-    public function test_if_input_is_not_provided_register_gives_errors()
+    public function test_if_input_is_not_provided_register_gives_errors(): void
     {
         $response = $this->post( route('register.sign-up'));
 
@@ -33,13 +33,13 @@ class RegisterTest extends TestCase
         );
     }
 
-    public function test_if_name_input_is_not_provided_register_gives_error()
+    public function test_if_name_input_is_not_provided_register_gives_error(): void
     {
-        $response = $this->post('/register', [
-                'email' => 'l@gmail.com',
-                'password' => 'pass',
-                'password_confirmation' => 'pass'
-        ]);
+        $response = $this->post( route('register.sign-up', [
+            'email' => 'l@gmail.com',
+            'password' => 'pass',
+            'password_confirmation' => 'pass'
+    ]) );
 
         $response->assertSessionHasErrors(
             [
@@ -50,13 +50,13 @@ class RegisterTest extends TestCase
         $response->assertSessionDoesntHaveErrors(['email', 'password', 'password_confirmation']);
     }
 
-    public function test_if_email_input_is_not_provided_register_gives_error()
+    public function test_if_email_input_is_not_provided_register_gives_error(): void
     {
-        $response = $this->post('/register', [
-                'name' => 'lika',
-                'password' => 'pass',
-                'password_confirmation' => 'pass'
-        ]);
+        $response = $this->post( route('register.sign-up', [
+            'name' => 'lika',
+            'password' => 'pass',
+            'password_confirmation' => 'pass'
+        ]));
 
         $response->assertSessionHasErrors(
             [
@@ -67,13 +67,13 @@ class RegisterTest extends TestCase
         $response->assertSessionDoesntHaveErrors(['name', 'password', 'password_confirmation']);
     }
 
-    public function test_if_password_input_is_not_provided_register_gives_error()
+    public function test_if_password_input_is_not_provided_register_gives_error(): void
     {
-        $response = $this->post('/register', [
+        $response = $this->post( route('register.sign-up', [
                 'name' => 'lika',
                 'email' => 'l@gmail.com',
                 'password_confirmation' => 'pass'
-        ]);
+        ]));
 
         $response->assertSessionHasErrors(
             [
@@ -84,13 +84,13 @@ class RegisterTest extends TestCase
         $response->assertSessionDoesntHaveErrors(['name', 'email']);
     }
 
-    public function test_if_password_confirmation_input_is_not_provided_register_gives_error()
+    public function test_if_password_confirmation_input_is_not_provided_register_gives_error(): void
     {
-        $response = $this->post('/register', [
+        $response = $this->post( route('register.sign-up', [
                 'name' => 'lika',
                 'email' => 'l@gmail.com',
                 'password' => 'pass'
-        ]);
+        ]));
 
         $response->assertSessionHasErrors(
             [
@@ -101,14 +101,14 @@ class RegisterTest extends TestCase
         $response->assertSessionDoesntHaveErrors(['name', 'email']);
     }
 
-    public function test_if_name_input_is_already_taken_register_gives_error()
+    public function test_if_name_input_is_already_taken_register_gives_error(): void
     {
-        $this->post('/register', [
+        $this->post( route('register.sign-up', [
             'name' => 'lika',
             'email' => 'l@gmail.com',
             'password' => 'pass',
             'password_confirmation' => 'pass'
-        ]);
+        ]));
         $response = $this->post('/register', [
                 'name' => 'lika',
         ]);
@@ -120,14 +120,14 @@ class RegisterTest extends TestCase
         );
     }
 
-    public function test_if_email_input_is_already_taken_register_gives_error()
+    public function test_if_email_input_is_already_taken_register_gives_error(): void
     {
-        $this->post('/register', [
+        $this->post( route('register.sign-up', [
             'name' => 'lika',
             'email' => 'l@gmail.com',
             'password' => 'pass',
             'password_confirmation' => 'pass'
-        ]);
+        ]));
         $response = $this->post('/register', [
                 'email' => 'l@gmail.com',
         ]);
@@ -140,12 +140,12 @@ class RegisterTest extends TestCase
         );
     }
 
-    public function test_if_password_and_password_confirmation_does_not_match_register_gives_error()
+    public function test_if_password_and_password_confirmation_does_not_match_register_gives_error(): void
     {
-        $response = $this->post('/register', [
+        $response = $this->post( route('register.sign-up', [
             'password' => 'pass',
             'password_confirmation' => 'pass2'
-        ]);
+        ]));
 
         $response->assertSessionHasErrors(
             [
@@ -155,11 +155,11 @@ class RegisterTest extends TestCase
         );
     }
 
-    public function test_if_email_format_is_incorrect_register_gives_error()
+    public function test_if_email_format_is_incorrect_register_gives_error(): void
     {
-        $response = $this->post('/register', [
+        $response = $this->post( route('register.sign-up', [
             'email' => 'lgmail.com',
-        ]);
+        ]));
 
         $response->assertSessionHasErrors(
             [
@@ -168,11 +168,11 @@ class RegisterTest extends TestCase
         );
     }
 
-    public function test_if_name_input_symbols_are_less_than_three_register_gives_error()
+    public function test_if_name_input_symbols_are_less_than_three_register_gives_error(): void
     {
-        $response = $this->post('/register', [
+        $response = $this->post( route('register.sign-up', [
             'name' => 'li',
-        ]);
+        ]));
         $response->assertSessionHasErrors(
             [
                 'name',
@@ -180,11 +180,11 @@ class RegisterTest extends TestCase
         );
     }
 
-    public function test_if_password_input_symbols_are_less_than_three_register_gives_error()
+    public function test_if_password_input_symbols_are_less_than_three_register_gives_error(): void
     {
-        $response = $this->post('/register', [
+        $response = $this->post( route('register.sign-up', [
             'password' => 'li',
-        ]);
+        ]));
 
         $response->assertSessionHasErrors(
             [
@@ -193,14 +193,14 @@ class RegisterTest extends TestCase
         );
     }
 
-    public function test_after_successful_register_user_should_be_redirected_to_success_feedback_page()
+    public function test_after_successful_register_user_should_be_redirected_to_success_feedback_page(): void
     {
-        $response = $this->post('/register', [
+        $response = $this->post( route('register.sign-up', [
             'name' => 'likuna',
             'email' => 'likuna@gmail.com',
             "password" => 'pass',
             'password_confirmation' => 'pass',
-        ]);
+        ]));
 
         $response->assertRedirect(route('email-sent') );
     }
