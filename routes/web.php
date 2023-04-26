@@ -21,10 +21,10 @@ use App\Http\Controllers\ResetPasswordController;
 
 
 Route::group(['controller' => AuthController::class], function () {
-    Route::get('/register', 'register')->name('register');
+    Route::view('/register', 'register')->name('register');
     Route::post('/register',  'signUp')->name('register.sign-up');
-    Route::get('/user/{token}',  'verifyEmail')->name('user.verify-email');
-    Route::get('/login',  'login')->name('login');
+    Route::get('/user/{id}',  'verifyEmail')->name('user.verify-email');
+    Route::view('/login',  'login')->name('login');
     Route::post('/login',  'signIn')->name('login.sign-in');
 });
 

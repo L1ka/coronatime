@@ -2,9 +2,10 @@
 
 namespace Tests\Feature;
 
-
+use App\Models\User;
+use App\Models\VerifyUser;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Str;
 use Tests\TestCase;
 
 class RegisterTest extends TestCase
@@ -203,5 +204,36 @@ class RegisterTest extends TestCase
         ]));
 
         $response->assertRedirect(route('email-sent') );
+    }
+
+
+    public function test_verification_email_should_redirect_user_to_success_page_after_clicking_on_verify_button(): void
+    {
+        $user =User::factory()->create([
+            'name' => 'likuna',
+            'email' => 'likuna@gmail.com',
+            "password" => 'pass',
+            'email_verified_at' => null,
+            'id' => 1
+        ]);
+
+        $response = $this->actingAs($user)->get(route('user.verify-email', ['id' => $user->id]));
+
+        $response->assertRedirect(route('success') );
+    }
+
+    public function test_verification_email_should_redirect_user_to_login_page_if_id_could_not_be_matched(): void
+    {
+        $user =User::factory()->create([
+            'name' => 'likuna',
+            'email' => 'likuna@gmail.com',
+            "password" => 'pass',
+            'email_verified_at' => null,
+            'id' => 1
+        ]);
+
+        $response = $this->actingAs($user)->get(route('user.verify-email', ['id' => 2]));
+
+        $response->assertRedirect(route('login') );
     }
 }
