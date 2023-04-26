@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers;
 use App\Http\Requests\Register\RegisterRequest;
-use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use App\Mail\VerifyEmail;
 use App\Models\User;
-use App\Models\VerifyUser;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use App\Http\Requests\Login\LoginRequest;
@@ -18,20 +15,9 @@ use App\Http\Requests\Login\LoginRequest;
 
 class AuthController extends Controller
 {
-    public function register(): View
-    {
-        return view('register');
-    }
-
     public function signUp(RegisterRequest $request): RedirectResponse
     {
         $user = User::create($request->validated());
-
-        VerifyUser::create([
-            'token' => Str::random(60),
-            'user_id' => $user->id
-        ]);
-
 
         Mail::to($user->email)->send(new VerifyEmail($user));
 
@@ -39,14 +25,15 @@ class AuthController extends Controller
     }
 
 
-    public function verifyEmail($token): RedirectResponse
+    public function verifyEmail($id): RedirectResponse
     {
-        $verifiedUser = VerifyUser::where('token', $token)->first();
+        $verifiedUser = User::find($id);
+
         if (isset($verifiedUser)) {
-            $user = $verifiedUser->user;
-            if (!$user->email_verified_at) {
-                $user->email_verified_at = now();
-                $user->save();
+
+            if (!$verifiedUser->email_verified_at) {
+                $verifiedUser->email_verified_at = now();
+                $verifiedUser->save();
                 return redirect()->route('success')->with('success', 'Your email has been verified');
             }
 
@@ -81,12 +68,5 @@ class AuthController extends Controller
 
       return redirect()->route('home');
     }
-
-    public function login(): View
-    {
-        return view('login');
-    }
-
-
 
 }

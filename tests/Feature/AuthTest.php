@@ -70,6 +70,27 @@ class AuthTest extends TestCase
         );
     }
 
+    public function test_if_user_is_not_verified_login_gives_error(): void
+    {
+        User::factory()->create([
+            'name' => 'likuna',
+            'email' => 'likuna@gmail.com',
+            "password" => 'pass',
+            'email_verified_at' => null
+        ]);
+
+        $response = $this->post( route('login.sign-in', [
+            'name' => 'likuna',
+            'password' => 'pass',
+        ]));
+
+        $response->assertSessionHasErrors(
+            [
+                'name' => 'Please verify your email to continue',
+            ]
+        );
+    }
+
     public function test_after_successful_authorization_with_name_user_should_be_redirected_to_worldwide_dashboard_page(): void
     {
         User::factory()->create([
