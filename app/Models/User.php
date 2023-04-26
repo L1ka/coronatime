@@ -37,15 +37,6 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
         $this->attributes['password'] = bcrypt($password);
     }
 
-
-
-    public function verifyUser(): HasOne
-    {
-        return $this->hasOne(VerifyUser::class);
-    }
-
-
-
     /**
      * Send a password reset notification to the user.
      *
