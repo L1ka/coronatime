@@ -8,7 +8,7 @@
                 <p class="text-sm-1 md:text-sm-4 text-dark  mt-6 text-center">{{ __('success_password') }}</p>
 
             </div>
-            <a href="/login"><button type="submit" class="btn-primary mb-[40px] md:mb-0  self-center md:text-sm-2 font-black">{{ __('login') }}</button></a>
+            <a href="{{ route('login') }}"><button type="submit" class="btn-primary mb-[40px] md:mb-0  self-center md:text-sm-2 font-black">{{ __('login') }}</button></a>
         </div>
 
     </div>

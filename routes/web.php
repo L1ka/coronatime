@@ -24,7 +24,7 @@ Route::group(['controller' => AuthController::class], function () {
     Route::view('/register', 'register')->name('register');
     Route::post('/register',  'signUp')->name('register.sign-up');
     Route::get('/user/{id}',  'verifyEmail')->name('user.verify-email');
-    Route::view('/login',  'login')->name('login');
+    Route::view('/',  'login')->name('login');
     Route::post('/login',  'signIn')->name('login.sign-in');
 });
 
