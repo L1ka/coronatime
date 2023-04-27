@@ -9,7 +9,7 @@
                 <button class="hidden md:inline-block text-sm-2">{{ __('logout') }}</button>
             </form>
             <div class="md:hidden flex flex-col relative text-end" x-data="{ open: false }">
-                <img src="{{ asset('images/menu-icon.svg') }}" alt="logo-icon" @click="open = !open" class="cursor-pointer">
+                <img src="{{ asset('images/menu-icon.svg') }}" alt="menu-icon" @click="open = !open" class="cursor-pointer">
                 <div class="absolute top-[120%] right-0 border border-solid border-gray rounded-md opacity-100 bg-white w-max " x-show="open">
                     <p class="cursor-pointer hover:bg-gray text-xs-1 font-bold p-2">{{ auth()->user()->name }}</p>
                     <form action="{{ route('logout') }}" method="post">
