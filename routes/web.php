@@ -33,7 +33,7 @@ Route::get('set-locale/{locale}', [LocaleController::class, 'setLocale'])->name(
 
 Route::middleware([ 'auth', 'verified'])->group(function() {
 
-    Route::post('/logout/user', [LogoutController::class, 'perform'])->name('logout.perform');
+    Route::post('/logout-user', [LogoutController::class, 'perform'])->name('logout.perform');
 
     Route::group(['controller' => StatisticController::class], function () {
 
@@ -61,8 +61,8 @@ Route::middleware([ 'guest'])->group(function() {
     });
 
     Route::view('/password-success', 'success-password')->name('password-success');
-    Route::view('/success/email', 'success-verify-email')->name('success');
-    Route::view('/verify/email', 'email-sent-message')->name('email-sent');
+    Route::view('/success-email', 'success-verify-email')->name('success');
+    Route::view('/verify-email', 'email-sent-message')->name('email-sent');
 });
 
 
