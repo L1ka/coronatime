@@ -1,4 +1,3 @@
-@props(['sortType', 'name', 'src'])
 
 
 <form  action="{{ route('dashboard-country.sort', ['sort' => $sortType, 'name' => $name]) }}" method="post" class=" h-4 flex justify-around">
