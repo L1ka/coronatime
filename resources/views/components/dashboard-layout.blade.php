@@ -29,7 +29,7 @@
                 {{ __('worldwide') }}
             </p>
         </a>
-        <a class="cursor-pointer " href="{{ route('dashboard-country.countries') }}">
+        <a class="cursor-pointer " href="{{ route('dashboard-country.get-countries') }}">
             <p  class="{{ request()->routeIs('dashboard-country.countries') || request()->routeIs('dashboard-country.sort')  ? 'border-b border-dark border-solid text-xs-3 md:text-sm-2 md:font-bold' : 'text-xs-1 md:text-sm-1'  }} mr-6  pb-4">
                 {{ __('country') }}
             </p>

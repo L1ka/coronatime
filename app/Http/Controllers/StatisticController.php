@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class StatisticController extends Controller
 {
 
-    public function countries(Request $request): View
+    public function getCountries(Request $request): View
     {
         if ($request->search) {
            $data =  Statistic::where('name->en', 'like', '%' . ucfirst($request->search) . '%')->

@@ -64,7 +64,7 @@
                         @foreach ($data as $country)
 
                         <tr class="border-b border-solid border-dark-4 flex w-full">
-                            <td class="p-4 w-1/4 break-all"> {{$country->name }} </td>
+                            <td class="p-4 w-1/4 break-all"> {{ $country->name }} </td>
                             <td class="p-4 w-1/4">{{ $country->new_case }}</td>
                             <td class="p-4 w-1/4">{{ $country->death }}</td>
                             <td class="p-4 w-1/4">{{ $country->recover }}</td>

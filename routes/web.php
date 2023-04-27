@@ -37,7 +37,7 @@ Route::middleware([ 'auth', 'verified'])->group(function() {
 
     Route::group(['controller' => StatisticController::class], function () {
 
-        Route::get('/dashboard/country', 'countries')->name('dashboard-country.countries');
+        Route::get('/dashboard/country', 'getCountries')->name('dashboard-country.get-countries');
 
         Route::post('/dashboard/country', 'sort')->name('dashboard-country.sort');
 
