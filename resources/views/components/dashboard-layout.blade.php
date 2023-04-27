@@ -4,7 +4,7 @@
         <div class="flex w-[50%] md:w-[30%] justify-evenly items-center">
             <x-dropdown></x-dropdown>
             <p class="hidden md:block text-sm-2 font-bold">{{ auth()->user()->name }}</p>
-            <form action="{{ route('logout.perform') }}" method="post">
+            <form action="{{ route('logout') }}" method="post">
                 @csrf
                 <button class="hidden md:inline-block text-sm-2">{{ __('logout') }}</button>
             </form>
@@ -12,7 +12,7 @@
                 <img src="{{ asset('images/menu-icon.svg') }}" alt="logo" @click="open = !open" class="cursor-pointer">
                 <div class="absolute top-[120%] right-0 border border-solid border-gray rounded-md opacity-100 bg-white w-max " x-show="open">
                     <p class="cursor-pointer hover:bg-gray text-xs-1 font-bold p-2">{{ auth()->user()->name }}</p>
-                    <form action="{{ route('logout.perform') }}" method="post">
+                    <form action="{{ route('logout') }}" method="post">
                         @csrf
                         <button class="text-xs-1 hover:bg-gray w-full p-2">{{ __('logout') }}</button>
                     </form>

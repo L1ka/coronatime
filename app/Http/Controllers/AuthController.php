@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use App\Http\Requests\Login\LoginRequest;
+use Illuminate\Support\Facades\Session;
 
 
 
@@ -67,6 +68,16 @@ class AuthController extends Controller
         session()->regenerate();
 
       return redirect()->route('home');
+    }
+
+    public function logout(): RedirectResponse
+    {
+
+        Session::flush();
+
+        Auth::logout();
+
+        return redirect( route('login') );
     }
 
 }
