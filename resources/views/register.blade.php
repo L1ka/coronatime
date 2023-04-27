@@ -3,7 +3,7 @@
     <div class="flex justify-center lg:block">
         <div class=" pt-4 lg:pt-10 px-4 lg:pl-28 min-h-full">
             <div class="flex justify-between w-full lg:w-[50%]">
-                <img src="{{ asset('images/logo.svg') }}" alt="logo" class="w-32 lg:w-44 h-8 lg:h-11">
+                <img src="{{ asset('images/logo.svg') }}" alt="logo-icon" class="w-32 lg:w-44 h-8 lg:h-11">
                 <x-dropdown></x-dropdown>
             </div>
             <p class="text-lg lg:text-xl text-dark lg:mt-[60px] mt-[43px] mb-[8px]">{{ __('signup_welcome') }}</p>
@@ -26,5 +26,5 @@
         </div>
 
     </div>
-    <img src="{{ asset('images/img.png') }}" alt="vaccine-photo" class="hidden lg:block absolute  right-0 top-0 w-[42%] h-full bg-cover">
+    <img src="{{ asset('images/img.png') }}" alt="vaccine-image" class="hidden lg:block absolute  right-0 top-0 w-[42%] h-full bg-cover">
 </x-layout>

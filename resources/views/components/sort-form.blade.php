@@ -5,8 +5,8 @@
     @csrf
 
     @if($sortType == 'asc')
-        <button><img class="cursor-pointer  w-[13px] " src="{{  request('name') == $name && request('sort') == 'asc' ?  asset('images/up-fill.svg') :  asset('images/up.svg')  }}" /></button>
+        <button><img alt="up-arrow-icon" class="cursor-pointer  w-[13px] " src="{{  request('name') == $name && request('sort') == 'asc' ?  asset('images/up-fill.svg') :  asset('images/up.svg')  }}" /></button>
     @else
-        <button><img class=" cursor-pointer w-[13px]" src="{{  request('name') == $name && request('sort') == 'desc' ?  asset('images/down-fill.svg') :  asset('images/down.svg')  }}"/></button>
+        <button><img alt="down-arrow-icon" class=" cursor-pointer w-[13px]" src="{{  request('name') == $name && request('sort') == 'desc' ?  asset('images/down-fill.svg') :  asset('images/down.svg')  }}"/></button>
     @endif
 </form>

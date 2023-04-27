@@ -4,7 +4,7 @@
             <form action="{{ route('password.update') }}" method="post">
                 @csrf
                 <div class="h-full flex flex-col">
-                    <img src="{{ asset('images/logo.svg') }}" alt="logo" class="w-32 md:w-44 h-8 md:h-11 md:self-center">
+                    <img src="{{ asset('images/logo.svg') }}" alt="logo-icon" class="w-32 md:w-44 h-8 md:h-11 md:self-center">
                     <p class="text-lg md:text-xl text-dark mb-[40px] md:mb-[60px] mt-[43px] md:mt-[148px] text-center">{{ __('reset_password') }}</p>
 
                     <x-input name="password" type="password" placeholder="{{ __('enter_new_password') }}" label="{{ __('new_password') }}"></x-input>
