@@ -129,6 +129,14 @@ if you've completed getting started section, then migrating database is fairly s
 
 ---
 
+## Artisan Command
+
+to generate covid statistics run below command:
+
+> php artisan generate:countries
+
+---
+
 ## Running Unit Tests
 
 Running unit tests also is very simple process, just type in following command:
