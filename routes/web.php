@@ -41,7 +41,7 @@ Route::middleware([ 'auth', 'verified'])->group(function() {
 
         Route::post('/dashboard-country', 'sort')->name('dashboard-country.sort');
 
-        Route::get('/dashboard/worldwide', 'worldwide')->name('home');
+        Route::get('/dashboard-worldwide', 'worldwide')->name('home');
     });
 
 });
