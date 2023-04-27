@@ -13,7 +13,8 @@ class StatisticController extends Controller
     public function countries(): View
     {
         if (request('search')) {
-           $data =  Statistic::where('name', 'like', '%' . ucfirst(request('search')) . '%')->get();
+           $data =  Statistic::where('name->en', 'like', '%' . ucfirst(request('search')) . '%')->
+           orWhere('name->ka', 'like', '%' . request('search') . '%')->get();
          }
         elseif(request('sort')){
           return $this->sort();
