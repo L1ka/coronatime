@@ -19,15 +19,15 @@ use App\Http\Controllers\ResetPasswordController;
 |
 */
 
-
-Route::group(['controller' => AuthController::class], function () {
-    Route::view('/register', 'register')->middleware('guest')->name('register');
-    Route::post('/register',  'signUp')->middleware('guest')->name('register.sign-up');
-    Route::get('/user/{id}',  'verifyEmail')->name('user.verify-email');
-    Route::view('/',  'login')->name('login');
-    Route::post('/login',  'signIn')->name('login.sign-in');
+Route::middleware([ 'guest'])->group(function() {
+    Route::group(['controller' => AuthController::class], function () {
+        Route::view('/register', 'register')->name('register');
+        Route::post('/register',  'signUp')->name('register.sign-up');
+        Route::get('/user/{id}',  'verifyEmail')->name('user.verify-email');
+        Route::view('/',  'login')->name('login');
+        Route::post('/login',  'signIn')->name('login.sign-in');
+    });
 });
-
 Route::get('set-locale/{locale}', [LocaleController::class, 'setLocale'])->name('set-locale');
 
 
