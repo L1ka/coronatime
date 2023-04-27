@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Password\ResetPasswordRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use App\Models\User;
@@ -12,11 +13,8 @@ use Illuminate\Support\Str;
 
 class ResetPasswordController extends Controller
 {
-    public function email(Request $request): RedirectResponse
+    public function resetEmail(Request $request): RedirectResponse
     {
-        $request->validate(['email' => 'required|email']);
-
-
 
         $status = Password::sendResetLink(
             $request->only('email')
@@ -35,13 +33,9 @@ class ResetPasswordController extends Controller
 
 
 
-    public function update(Request $request): RedirectResponse
+    public function update( ResetPasswordRequest $request): RedirectResponse
     {
-        $request->validate([
-            'token' => ['required' ],
-            'email' => ['required', 'email'],
-            'password' => ['required', 'confirmed','min:3'],
-        ]);
+
 
         $status = Password::reset(
             $request->only('email', 'password', 'password_confirmation', 'token'),

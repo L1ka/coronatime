@@ -1,4 +1,3 @@
-@props(['name', 'type', 'label', 'placeholder'])
 
 <div class="flex flex-col mb-[5%]">
     <label for="{{ $name }}" class="text-dark text-xs-3 lg:text-sm-2 lg:font-bold mb-[3%]">{{ $label }}</label>

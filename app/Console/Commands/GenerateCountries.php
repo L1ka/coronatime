@@ -13,7 +13,7 @@ class GenerateCountries extends Command
      *
      * @var string
      */
-    protected $signature = 'generate:countries';
+    protected $signature = 'coronatime:generate-countries';
 
     /**
      * The console command description.
@@ -27,6 +27,7 @@ class GenerateCountries extends Command
      */
     public function handle()
     {
+        Http::fake();
         $data =collect(json_decode(Http::get('https://devtest.ge/countries'))) ;
 
         $data->map(function($country, $id){

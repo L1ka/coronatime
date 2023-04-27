@@ -5,19 +5,19 @@ namespace App\Http\Controllers;
 
 use App\Models\Statistic;
 use Illuminate\Contracts\View\View;
-
+use Illuminate\Http\Request;
 
 class StatisticController extends Controller
 {
 
-    public function countries(): View
+    public function getCountries(Request $request): View
     {
-        if (request('search')) {
-           $data =  Statistic::where('name->en', 'like', '%' . ucfirst(request('search')) . '%')->
-           orWhere('name->ka', 'like', '%' . request('search') . '%')->get();
+        if ($request->search) {
+           $data =  Statistic::where('name->en', 'like', '%' . ucfirst($request->search) . '%')->
+           orWhere('name->ka', 'like', '%' . $request->search . '%')->get();
          }
-        elseif(request('sort')){
-          return $this->sort();
+        elseif($request->sort){
+          return $this->sort($request);
         }
         else{
             $data = Statistic::all();
@@ -27,12 +27,12 @@ class StatisticController extends Controller
     }
 
 
-    public function sort(): View
+    public function sort(Request $request): View
     {
 
-        if(request('sort') == 'asc' ) $data = Statistic::all()->sortBy(request('name'), SORT_REGULAR, true);
+        if($request->sort == 'asc' ) $data = Statistic::all()->sortBy($request->input('name'), SORT_REGULAR, true);
 
-        if(request('sort') == 'desc' ) $data = Statistic::all()->sortBy(request('name'), SORT_REGULAR, false);
+        if($request->sort == 'desc' ) $data = Statistic::all()->sortBy($request->input('name'), SORT_REGULAR, false);
 
 
         return view('dashboard-country', ['data' => $data,  'sum' => $this->countrySum()]);

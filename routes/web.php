@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\LogoutController;
+
 use App\Http\Controllers\StatisticController;
 use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\ResetPasswordController;
@@ -33,15 +33,15 @@ Route::get('set-locale/{locale}', [LocaleController::class, 'setLocale'])->name(
 
 Route::middleware([ 'auth', 'verified'])->group(function() {
 
-    Route::post('/logout-user', [LogoutController::class, 'perform'])->name('logout.perform');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
     Route::group(['controller' => StatisticController::class], function () {
 
-        Route::get('/dashboard-country', 'countries')->name('dashboard-country.countries');
+        Route::get('/dashboard/country', 'getCountries')->name('dashboard-country.get-countries');
 
-        Route::post('/dashboard-country', 'sort')->name('dashboard-country.sort');
+        Route::post('/dashboard/country', 'sort')->name('dashboard-country.sort');
 
-        Route::get('/dashboard-worldwide', 'worldwide')->name('home');
+        Route::get('/dashboard', 'worldwide')->name('home');
     });
 
 });
@@ -52,7 +52,7 @@ Route::middleware([ 'guest'])->group(function() {
 
     Route::group(['controller' => ResetPasswordController::class], function () {
 
-        Route::post('/forgot-password',  'email')->name('password.email');
+        Route::post('/forgot-password',  'resetEmail')->name('password.reset-email');
 
         Route::get('/reset-password/{token}',  'reset')->name('password.reset');
 
