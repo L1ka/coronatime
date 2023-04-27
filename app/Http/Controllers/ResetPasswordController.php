@@ -13,7 +13,7 @@ use Illuminate\Support\Str;
 
 class ResetPasswordController extends Controller
 {
-    public function email(Request $request): RedirectResponse
+    public function resetEmail(Request $request): RedirectResponse
     {
         $request->validate(['email' => 'required|email']);
 

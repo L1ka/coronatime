@@ -2,7 +2,7 @@
 <x-layout>
     <div class="flex  justify-center h-screen pt-4 lg:pt-10  ">
         <div class="w-[343px] lg:w-[392px] flex flex-col  h-full lg:h-[460px]">
-            <form action="{{ route('password.email') }}" method="post">
+            <form action="{{ route('password.reset-email') }}" method="post">
                 @csrf
             <div class="h-full lg:flex lg:flex-col">
                 <img src="{{ asset('images/logo.svg') }}" alt="logo" class="w-32 lg:w-44 h-8 lg:h-11 lg:self-center">
