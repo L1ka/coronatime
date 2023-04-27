@@ -13,7 +13,7 @@ class GenerateCountries extends Command
      *
      * @var string
      */
-    protected $signature = 'generate:countries';
+    protected $signature = 'coronatime:generate-countries';
 
     /**
      * The console command description.
