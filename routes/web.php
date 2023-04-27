@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LogoutController;
-use App\Http\Controllers\StatController;
+use App\Http\Controllers\StatisticController;
 use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\ResetPasswordController;
 
@@ -35,7 +35,7 @@ Route::middleware([ 'auth', 'verified'])->group(function() {
 
     Route::post('/logout/user', [LogoutController::class, 'perform'])->name('logout.perform');
 
-    Route::group(['controller' => StatController::class], function () {
+    Route::group(['controller' => StatisticController::class], function () {
 
         Route::get('/dashboard-country', 'countries')->name('dashboard-country.countries');
 
