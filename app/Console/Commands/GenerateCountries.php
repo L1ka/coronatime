@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
-use App\Models\Stat;
+use App\Models\Statistic;
 
 class GenerateCountries extends Command
 {
@@ -34,7 +34,7 @@ class GenerateCountries extends Command
                 "code" => $country->code,
             ]));
 
-            return Stat::updateOrCreate(
+            return Statistic::updateOrCreate(
             ['id' => $id + 1 ],
             [
                 'name' => ['en' => $country->name->en, 'ka' => $country->name->ka],

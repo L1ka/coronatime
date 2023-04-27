@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LogoutController;
-use App\Http\Controllers\StatController;
+use App\Http\Controllers\StatisticController;
 use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\ResetPasswordController;
 
@@ -21,8 +21,8 @@ use App\Http\Controllers\ResetPasswordController;
 
 
 Route::group(['controller' => AuthController::class], function () {
-    Route::view('/register', 'register')->name('register');
-    Route::post('/register',  'signUp')->name('register.sign-up');
+    Route::view('/register', 'register')->middleware('guest')->name('register');
+    Route::post('/register',  'signUp')->middleware('guest')->name('register.sign-up');
     Route::get('/user/{id}',  'verifyEmail')->name('user.verify-email');
     Route::view('/',  'login')->name('login');
     Route::post('/login',  'signIn')->name('login.sign-in');
@@ -35,7 +35,7 @@ Route::middleware([ 'auth', 'verified'])->group(function() {
 
     Route::post('/logout/user', [LogoutController::class, 'perform'])->name('logout.perform');
 
-    Route::group(['controller' => StatController::class], function () {
+    Route::group(['controller' => StatisticController::class], function () {
 
         Route::get('/dashboard-country', 'countries')->name('dashboard-country.countries');
 

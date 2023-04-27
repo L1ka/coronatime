@@ -57,9 +57,9 @@
 
                     <tr class="border-b border-solid border-dark-4 flex w-full">
                         <td class="p-4 w-1/4">Worldwide</td>
-                        <td class="p-4 w-1/4">{{ $new_case }}</td>
-                        <td class="p-4 w-1/4">{{ $death }}</td>
-                        <td class="p-4 w-1/4">{{ $recover }}</td>
+                        <td class="p-4 w-1/4">{{ $sum['new_case'] }}</td>
+                        <td class="p-4 w-1/4">{{ $sum['death']  }}</td>
+                        <td class="p-4 w-1/4">{{ $sum['recover']  }}</td>
                     </tr>
                         @foreach ($data as $country)
 
