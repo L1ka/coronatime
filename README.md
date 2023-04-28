@@ -111,6 +111,14 @@ MAILTRAP:
 
 > MAIL_FROM_NAME=\*\*\*
 
+---
+
+to generate APP_KEY you can run:
+
+> php artisan key:generate
+
+---
+
 after setting up .env file, execute:
 
 > php artisan config:cache
@@ -126,14 +134,6 @@ Now, you should be good to go!
 if you've completed getting started section, then migrating database is fairly simple process, just execute:
 
 > php artisan migrate
-
----
-
-## Artisan Command
-
-to generate covid statistics run below command:
-
-> php artisan generate:countries
 
 ---
 
