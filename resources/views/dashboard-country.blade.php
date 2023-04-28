@@ -3,12 +3,21 @@
 <x-layout>
     <x-dashboard-layout>
 
-        <form action="">
+         <form action="" method="get">
             <div class="flex items-center md:justify-center md:border md:border-gray md:border-solid md:rounded md:w-fit  mb-6 md:mb-10 md:p-2">
                 <img src="{{ asset('images/search.svg') }}" alt="search-icon" class="mr-4">
                 <input name="search" type="text" value="{{ request('search') }}" placeholder="{{ __('search') }}" class="focus:outline-none" >
             </div>
+            @if (request('name'))
+                 <input name="name" value="{{ request('name') }}" type="hidden" >
+            @endif
+            @if (request('sort'))
+                <input name="sort" value="{{ request('sort') }}" type="hidden" >
+            @endif
+
         </form>
+
+
 
         <div class="pt-4 md:pt-10 ">
             <table class="text-left max-w-[300px] md:min-w-full bg-white border border-solid border-dark-4">
@@ -18,8 +27,8 @@
                             <div class="flex items-center">
                                 <p class="text-xs-1 md:text-sm-2 font-bold mr-2 md:mr-4 break-all">{{ __('location') }}</p>
                                 <div>
-                                    <x-sort-form sortType='asc' name='name' ></x-sort-form>
-                                    <x-sort-form sortType='desc' name='name' ></x-sort-form>
+                                    <x-sort-form sortType='asc' name='name' search=""></x-sort-form>
+                                    <x-sort-form sortType='desc' name='name' search=""></x-sort-form>
                                 </div>
                             </div>
                         </th>
@@ -27,8 +36,8 @@
                             <div class="flex items-center">
                                 <p class="text-xs-1 md:text-sm-2 font-bold md:mr-4 break-all">{{ __('new_cases') }}</p>
                                 <div>
-                                    <x-sort-form sortType='asc' name='new_case' ></x-sort-form>
-                                    <x-sort-form sortType='desc' name='new_case' ></x-sort-form>
+                                    <x-sort-form sortType='asc' name='new_case' search=""></x-sort-form>
+                                    <x-sort-form sortType='desc' name='new_case' search=""></x-sort-form>
                                 </div>
                             </div>
                         </th>
@@ -36,8 +45,8 @@
                             <div class="flex items-center">
                                 <p class=" text-xs-1 md:text-sm-2 font-bold mr-2 md:mr-4 break-all">{{ __('death') }}</p>
                                 <div>
-                                    <x-sort-form sortType='asc' name='death' ></x-sort-form>
-                                    <x-sort-form sortType='desc' name='death' ></x-sort-form>
+                                    <x-sort-form sortType='asc' name='death' search=""></x-sort-form>
+                                    <x-sort-form sortType='desc' name='death' search=""></x-sort-form>
                                </div>
                             </div>
                         </th>
@@ -45,8 +54,8 @@
                             <div class="flex items-center">
                                 <p class="text-xs-1 md:text-sm-2 font-bold mr-2 md:mr-4 break-all">{{ __('recover') }}</p>
                                 <div>
-                                    <x-sort-form sortType='asc' name='recover'></x-sort-form>
-                                    <x-sort-form sortType='desc' name='recover'></x-sort-form>
+                                    <x-sort-form sortType='asc' name='recover' search=""></x-sort-form>
+                                    <x-sort-form sortType='desc' name='recover' search=""></x-sort-form>
                                 </div>
                             </div>
                         </th>
