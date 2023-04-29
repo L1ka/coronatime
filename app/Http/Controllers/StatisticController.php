@@ -12,16 +12,10 @@ class StatisticController extends Controller
 
     public function getCountries(Request $request): View
     {
-        if ($request->search) {
-           $data =  Statistic::where('name->en', 'like', '%' . ucfirst($request->search) . '%')->
-           orWhere('name->ka', 'like', '%' . $request->search . '%')->get();
-         }
-        elseif($request->sort){
-          return $this->sort($request);
-        }
-        else{
-            $data = Statistic::all();
-        }
+        if ($request->search || $request->name) return $this->sort($request);
+
+        $data = Statistic::all();
+
 
         return view('dashboard-country', ['data' => $data, 'sum' => $this->countrySum()]);
     }
@@ -29,13 +23,29 @@ class StatisticController extends Controller
 
     public function sort(Request $request): View
     {
+        $filtered = Statistic::where('name->en', 'like', '%' . ucfirst($request->search) . '%')->
+        orWhere('name->ka', 'like', '%' . $request->search . '%')->get();
 
-        if($request->sort == 'asc' ) $data = Statistic::all()->sortBy($request->input('name'), SORT_REGULAR, true);
 
-        if($request->sort == 'desc' ) $data = Statistic::all()->sortBy($request->input('name'), SORT_REGULAR, false);
-
+        if($request->sort && $request->search){
+            if($request->sort == 'asc'){
+                $data =  $filtered->sortBy($request->input('name'), SORT_REGULAR, true);
+            }else{
+                $data =  $filtered->sortBy($request->input('name'), SORT_REGULAR, false);
+            }
+        }elseif($request->search && $request->sort == null)
+        {
+            $data =  $filtered;
+        }else{
+            if($request->sort == 'asc'){
+                $data = Statistic::all()->sortBy($request->input('name'), SORT_REGULAR, true);
+            }else{
+                $data = Statistic::all()->sortBy($request->input('name'), SORT_REGULAR, false);
+            }
+        }
 
         return view('dashboard-country', ['data' => $data,  'sum' => $this->countrySum()]);
+
     }
 
     public function worldwide(): View
